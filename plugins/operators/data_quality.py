@@ -51,16 +51,16 @@ class DataQualityOperator(BaseOperator):
             self.log.info(f"DQ on table {tbl} check passed with 0 nan rows")
 
             # 3. count number of duplicated rows in user, song, artist(expected=0)
-            if tbl!="time":
-                duplicated_tbl=redshift.get_records(f"""
-                SELECT COUNT(*)
-                FROM {tbl}
-                GROUP BY {pk[tbl]}
-                """)
-                duplicated_row=duplicated_tbl[0][0]
-                if duplicated_row>0:
-                    raise ValueError(f"DQ failed. {tbl} contained {duplicated_row} duplicated rows")
-                self.log.info(f"DQ on table {tbl} check passed with 0 duplicated rows")
+            #if tbl!="time":
+            #    duplicated_tbl=redshift.get_records(f"""
+            #    SELECT COUNT(*)
+            #    FROM {tbl}
+            #    GROUP BY {pk[tbl]}
+            #    """)
+            #    duplicated_row=duplicated_tbl[0][0]
+            #    if duplicated_row>0:
+            #        raise ValueError(f"DQ failed. {tbl} contained {duplicated_row} duplicated rows")
+            #    self.log.info(f"DQ on table {tbl} check passed with 0 duplicated rows")
         
         # 4. for time table, check the distribution of start_time
         # min(start_time) must >0

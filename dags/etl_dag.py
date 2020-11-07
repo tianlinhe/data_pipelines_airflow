@@ -27,7 +27,7 @@ default_args = {
 
 }
 
-dag = DAG('udac_example_dag',
+dag = DAG('etl_dag',
           default_args=default_args,
           description='Load and transform data in Redshift with Airflow',
           schedule_interval="@daily" #so that it run once only
@@ -49,7 +49,7 @@ stage_events_to_redshift = StageToRedshiftOperator(
     task_id='Stage_events',
     dag=dag,
     redshift_conn_id='redshift',
-    aws_credentilas_id='aws_credentails',
+    aws_credentials_id='aws_credentials',
     target_table='staging_events',
     s3_bucket='udacity-dend',
     s3_key='log_data'
@@ -60,7 +60,7 @@ stage_songs_to_redshift = StageToRedshiftOperator(
     task_id='Stage_songs',
     dag=dag,
     redshift_conn_id='redshift',
-    aws_credentilas_id='aws_credentails',
+    aws_credentials_id='aws_credentials',
     target_table='staging_songs',
     s3_bucket='udacity-dend',
     s3_key='song_data'
